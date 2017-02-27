@@ -10,6 +10,7 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
 use Veda\Lazada\Exception\ResponseException;
 use Veda\Lazada\Response\XmlResponse;
 use Veda\Lazada\Response\JsonResponse;
@@ -50,21 +51,16 @@ class Client
 
         try {
             // signature and build request
-            $this->getRequest()->signature()->build();
+            $request = $this->getRequest()->signature()->build();
 
             $httpClient = new HttpClient();
-
-            $response = $httpClient->request($this->getRequest()->getMethod(), $this->getRequest()->getUrl(), $this->getRequest()->getRequestOptions());
-
-            $responseObject = ResponseFactory::create($this->getRequest()->getResponseHandle(), $response);
-
+            $response = $httpClient->request($request->getMethod(), $request->getUrl(), $request->getRequestOptions());
+            $responseObject = ResponseFactory::create($request->getResponseHandle(), $response);
             return $responseObject;
 
         } catch (ConnectException $e) {
             throw new ResponseException($e->getMessage(), $e->getResponse(), $this->getRequest());
-        } catch (ClientException $e) {
-            throw new ResponseException($e->getMessage(), $e->getResponse(), $this->getRequest());
-        } catch (BadResponseException $e) {
+        }catch (RequestException $e) {
             throw new ResponseException($e->getMessage(), $e->getResponse(), $this->getRequest());
         }
     }

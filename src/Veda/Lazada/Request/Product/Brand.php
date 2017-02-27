@@ -1,21 +1,25 @@
 <?php
 /**
- * User: ketu.lai <ketu.lai@gmail.com>
- * Date: 2017/2/22
+ * Created by PhpStorm.
+ * User: laigc
+ * Date: 2017/2/27
+ * Time: 17:49
  */
 
 namespace Veda\Lazada\Request\Product;
 
+
 use Veda\Lazada\RequestAbstract;
 use Veda\Lazada\Request\RequestTrait;
 
-class Query extends RequestAbstract
+class Brand extends RequestAbstract
 {
     use RequestTrait;
+
     public function getAction()
     {
         // TODO: Implement getAction() method.
-        return "GetProducts";
+        return "GetBrands";
     }
 
     public function getMethod()
@@ -23,5 +27,4 @@ class Query extends RequestAbstract
         // TODO: Implement getMethod() method.
         return "GET";
     }
-
-}
+ }

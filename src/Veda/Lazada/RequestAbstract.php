@@ -6,14 +6,10 @@
 
 namespace Veda\Lazada;
 
-use Veda\Lazada\Utils\MutatorTrait;
-
 use Veda\Lazada\Response\JsonResponse;
 
 abstract class RequestAbstract
 {
-    use MutatorTrait;
-
     protected $config;
 
     protected $fullApiUrl;
@@ -33,6 +29,8 @@ abstract class RequestAbstract
         //'Signature' => null,
     ];
 
+    private $queryParams = [];
+
     public function __construct(Config $config)
     {
         $this->config = $config;
@@ -42,6 +40,14 @@ abstract class RequestAbstract
 
     abstract public function getAction();
 
+    protected function setQueryParam($key, $value) {
+        $this->queryParams[$key] = $value;
+    }
+
+    protected function setQueryParams(array $param)
+    {
+        $this->queryParams = array_merge($this->queryParams, $param);
+    }
 
     public function getUrl()
     {
@@ -63,14 +69,19 @@ abstract class RequestAbstract
         if ($requestBody) {
             $requestOptions = array_merge($requestOptions, ['body'=> $requestBody]);
         }
+        if ($this->queryParams) {
+            $requestOptions = array_merge($requestOptions, ['form_params'=> $this->queryParams]);
+        }
+
         return $requestOptions;
     }
 
     private function getBuildParams()
     {
-        if ($this->getMethod() == 'GET' && $this->params) {
-            return array_merge($this->params, $this->parameters);
+        if ($this->getMethod() == 'GET' && $this->queryParams) {
+            return array_merge($this->queryParams, $this->parameters);
         }
+
         return $this->parameters;
     }
     public function signature()
@@ -105,6 +116,7 @@ abstract class RequestAbstract
     }
     public function build()
     {
+
         $apiUrl = $this->getConfig()->getApiUrl();
         $query = http_build_query($this->getBuildParams(), '', '&', PHP_QUERY_RFC3986);
         $this->fullApiUrl = $apiUrl . '?' . $query;
