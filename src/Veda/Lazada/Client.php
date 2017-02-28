@@ -52,9 +52,6 @@ class Client
             // signature and build request
             $request = $this->getRequest()->signature()->build();
             $httpClient = new HttpClient();
-
-            var_dump($request->getRequestOptions());
-            exit();
             $response = $httpClient->request($request->getMethod(), $request->getUrl(), $request->getRequestOptions());
             $responseObject = ResponseFactory::create($request->getResponseHandle(), $response);
             return $responseObject;

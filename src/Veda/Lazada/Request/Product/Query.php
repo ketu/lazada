@@ -12,6 +12,7 @@ use Veda\Lazada\Request\PagingTrait;
 class Query extends RequestAbstract
 {
     use PagingTrait;
+
     public function getAction()
     {
         // TODO: Implement getAction() method.
