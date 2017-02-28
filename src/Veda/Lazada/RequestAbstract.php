@@ -86,17 +86,20 @@ abstract class RequestAbstract
     }
     public function signature()
     {
+        if (isset($this->parameters['Signature'])) {
+            unset($this->parameters['Signature']);
+        }
         $datetime = new \DateTime();
         $this->parameters['Timestamp'] = $datetime->format(\DateTime::ISO8601);
         $this->parameters['UserID'] = $this->getConfig()->getUserId();
 
-        $actionMethod = $this->getAction();
+        $action = $this->getAction();
 
-        if (!$actionMethod) {
-            throw new \InvalidArgumentException('action not set');
+        if (!$action) {
+            throw new \InvalidArgumentException('API Action not set');
         }
 
-        $this->parameters['Action'] = $actionMethod;
+        $this->parameters['Action'] = $action;
 
         $finalParameters = $this->getBuildParams();
 
