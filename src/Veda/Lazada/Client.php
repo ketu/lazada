@@ -21,13 +21,16 @@ class Client
     protected $request;
 
 
-    public function __construct(RequestAbstract $request)
+    public function __construct(RequestAbstract $request = null)
     {
         $this->request = $request;
     }
 
     public function getRequest()
     {
+        if (null === $this->request) {
+            throw new \InvalidArgumentException("Request not set");
+        }
         return $this->request;
     }
 
@@ -45,15 +48,13 @@ class Client
             $this->setRequest($request);
         }
 
-        if (!$this->getRequest()) {
-            throw new \InvalidArgumentException("Request not set");
-        }
-
         try {
             // signature and build request
             $request = $this->getRequest()->signature()->build();
-
             $httpClient = new HttpClient();
+
+            var_dump($request->getRequestOptions());
+            exit();
             $response = $httpClient->request($request->getMethod(), $request->getUrl(), $request->getRequestOptions());
             $responseObject = ResponseFactory::create($request->getResponseHandle(), $response);
             return $responseObject;

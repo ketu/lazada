@@ -10,11 +10,11 @@ namespace Veda\Lazada\Request\Product;
 
 
 use Veda\Lazada\RequestAbstract;
-use Veda\Lazada\Request\RequestTrait;
+use Veda\Lazada\Request\PagingTrait;
 
 class Brand extends RequestAbstract
 {
-    use RequestTrait;
+    use PagingTrait;
 
     public function getAction()
     {

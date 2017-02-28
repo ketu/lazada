@@ -6,11 +6,12 @@
 
 namespace Veda\Lazada\Request\Product;
 
-
+use Veda\Lazada\Request\PagingTrait;
 use Veda\Lazada\RequestAbstract;
 
 class SearchSPU extends RequestAbstract
 {
+    use PagingTrait;
 
     public function getAction()
     {

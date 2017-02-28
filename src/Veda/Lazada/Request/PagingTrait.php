@@ -1,19 +1,19 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: laigc
+ * User: ketu.lai <ketu.lai@gmail.com>
  * Date: 2017/2/27
- * Time: 17:51
  */
+
 
 namespace Veda\Lazada\Request;
 
 
-trait RequestTrait
+trait PagingTrait
 {
-    public function setLimit($limit)
+    public function setLimit($limit, $offset = 0)
     {
         $this->setQueryParam('Limit', $limit);
+        $this->setQueryParam('Offset', $offset);
 
     }
     public function setOffset($offset)

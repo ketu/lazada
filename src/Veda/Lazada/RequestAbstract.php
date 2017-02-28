@@ -54,7 +54,7 @@ abstract class RequestAbstract
         return $this->fullApiUrl;
     }
 
-    public function getRequestBody()
+    protected function getRequestBody()
     {
         return $this->requestBody;
     }
@@ -78,7 +78,7 @@ abstract class RequestAbstract
 
     private function getBuildParams()
     {
-        if ($this->getMethod() == 'GET' && $this->queryParams) {
+        if ($this->queryParams) {
             return array_merge($this->queryParams, $this->parameters);
         }
 

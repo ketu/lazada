@@ -8,10 +8,18 @@ namespace Veda\Lazada\Request\Product;
 
 use Veda\Lazada\RequestAbstract;
 use Sabre\Xml\Service;
+use Veda\Lazada\Utils\ArrayToXml;
 
 class Create extends RequestAbstract
 {
-    protected $responseHandler = \Veda\Lazada\Response\Product\Create::class;
+    //protected $responseHandler = \Veda\Lazada\Response\Product\Create::class;
+
+    protected $attributes;
+    protected $variation;
+    protected $spuId;
+    protected $categoryId;
+    protected $associatedSku;
+
 
     public function getMethod()
     {
@@ -25,94 +33,75 @@ class Create extends RequestAbstract
         return 'CreateProduct';
     }
 
-
-    private function buildProductData()
+    public function setCategory($primaryCategory)
     {
-        if (!$this->getProductData()) {
-            throw new \InvalidArgumentException("Product data not set");
-        }
-        $data = [];
-
-        foreach ($this->getProductData() as $key => $product) {
-            $images = [];
-            if (isset($product['images'])) {
-                foreach ($product['images'] as $image) {
-                    $images[]['Image'] = $image;
-                }
-            }
-
-
-            $data[] = [
-                'Sku' => [
-                    /*
-                     *   <SellerSku>api-create-test-1</SellerSku>
-                <color_family>Green</color_family>
-                <size>40</size>
-                <quantity>1</quantity>
-                <price>388.50</price>
-                <package_length>11</package_length>
-                <package_height>22</package_height>
-                <package_weight>33</package_weight>
-                <package_width>44</package_width>
-                <package_content>this is what's in the box</package_content>
-                <Images>
-                    <Image>http://sg.s.alibaba.lzd.co/original/59046bec4d53e74f8ad38d19399205e6.jpg</Image>
-                    <Image>http://sg.s.alibaba.lzd.co/original/179715d3de39a1918b19eec3279dd482.jpg</Image>
-                </Images>
-                     */
-                    'SellerSku' => isset($product['sku']) ? $product['sku'] : null,
-                    'price' => isset($product['price']) ? $product['price'] : null,
-                    'quantity' => isset($product['quantity']) ? $product['quantity'] : null,
-                    'special_price' => isset($product['specialPrice']) ? $product['specialPrice'] : null,
-                    'package_height' => isset($product['packageHeight']) ? $product['packageHeight'] : null,
-                    'package_length' => isset($product['packageLength']) ? $product['packageLength'] : null,
-                    'package_width' => isset($product['packageWidth']) ? $product['packageWidth'] : null,
-                    'package_weight' => isset($product['packageWeight']) ? $product['packageWeight'] : null,
-                    'package_content' => isset($product['packageContent']) ? $product['packageContent'] : null,
-                    'Images' => $images,
-                ]
-            ];
-        }
-        return $data;
+        $this->categoryId = $primaryCategory;
     }
 
-    private function buildAttributes()
+    public function setSpu($spuId)
     {
-        $commonAttributes = [
-            'name' => $this->getName(),
-            'description' => $this->getDescription(),
-            'short_description' => $this->getShortDescription(),
-            'brand' => $this->getBrand(),
-            'model' => $this->getModel(),
-            'warranty' => $this->getWarranty(),
-            'warranty_type' => $this->getWarrantyType(),
-
-        ];
-        if ($this->getCategoryAttributes()) {
-            $commonAttributes = array_merge($commonAttributes, $this->getCategoryAttributes());
-        }
-        return $commonAttributes;
+        $this->spuId = $spuId;
     }
 
-    public function getRequestBody()
+    public function setAttributes($attribute)
     {
-        $service = new Service();
-        if (!$this->getCatalog()) {
-            throw new \InvalidArgumentException("Primary category not set");
+        $this->attributes = $attribute;
+    }
+
+    public function setName($productName)
+    {
+        $this->addAttribute('name', $productName);
+    }
+
+    public function addAttribute($key, $value)
+    {
+        $this->attributes[$key] = $value;
+    }
+
+    public function setDescription($description)
+    {
+        $this->addAttribute('description', $description);
+    }
+
+    public function setBrand($brand)
+    {
+        $this->addAttribute('brand', $brand);
+    }
+
+    public function setShortDescription($shortDescription)
+    {
+        $this->addAttribute('short_description', $shortDescription);
+    }
+
+    public function setAssociatedSku(array $associatedSku)
+    {
+        $this->associatedSku = $associatedSku;
+    }
+
+
+    public function setVariation(array $variation)
+    {
+        $formatVariation = [];
+        foreach($variation as $key=> $value) {
+            $formatVariation[]['Sku'] = $value;
         }
+        $this->variation = $formatVariation;
+    }
 
-
-        $xml = $service->write('Request', [
+    protected function getRequestBody()
+    {
+        $data = [
             'Product' => [
-                'PrimaryCategory' => $this->getCatalog(),
-                'SPUId' => $this->getSpu(),
-                'AssociatedSku' => $this->getAssociatedSku(),
-                'Attributes' => $this->buildAttributes(),
-                'Skus' => $this->buildProductData()
-                // SKUS
-            ] //product
-        ]);
-        echo $xml;
-        return $xml;
+                'PrimaryCategory' => $this->categoryId,
+                'SPUId' => $this->spuId,
+                'AssociatedSku' => $this->associatedSku,
+                'Attributes' => $this->attributes,
+                'Skus' => $this->variation,
+            ]
+        ];
+        $xml = ArrayToXml::convert($data, 'Request');
+        $this->requestBody = $xml;
+
+        return $this->requestBody;
     }
 }
