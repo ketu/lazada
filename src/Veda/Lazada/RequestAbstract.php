@@ -40,6 +40,8 @@ abstract class RequestAbstract
 
     abstract public function getAction();
 
+
+
     protected function setQueryParam($key, $value) {
         $this->queryParams[$key] = $value;
     }
@@ -75,8 +77,7 @@ abstract class RequestAbstract
 
         return $requestOptions;
     }
-
-    private function getBuildParams()
+    private function getBuildParameters()
     {
         if ($this->queryParams) {
             return array_merge($this->queryParams, $this->parameters);
@@ -101,7 +102,7 @@ abstract class RequestAbstract
 
         $this->parameters['Action'] = $action;
 
-        $finalParameters = $this->getBuildParams();
+        $finalParameters = $this->getBuildParameters();
 
         ksort($finalParameters);
 
@@ -119,9 +120,8 @@ abstract class RequestAbstract
     }
     public function build()
     {
-
         $apiUrl = $this->getConfig()->getApiUrl();
-        $query = http_build_query($this->getBuildParams(), '', '&', PHP_QUERY_RFC3986);
+        $query = http_build_query($this->getBuildParameters(), '', '&', PHP_QUERY_RFC3986);
         $this->fullApiUrl = $apiUrl . '?' . $query;
 
         return $this;

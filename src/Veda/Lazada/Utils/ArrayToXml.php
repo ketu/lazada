@@ -14,7 +14,7 @@ use DOMException;
 
 final class ArrayToXml
 {
-    public function __construct(array $arrayData, $rootElementName = null)
+    private function __construct(array $arrayData, $rootElementName = null)
     {
         $this->document = new DOMDocument();
         $this->document->appendChild($this->document->createElement($rootElementName == null ? 'root' : $rootElementName));
@@ -70,5 +70,10 @@ final class ArrayToXml
     private function createElement($name, $value = null)
     {
         return $this->document->createElement($name, $value);
+    }
+
+    private function __clone()
+    {
+        // TODO: Implement __clone() method.
     }
 }

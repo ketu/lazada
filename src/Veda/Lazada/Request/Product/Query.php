@@ -70,4 +70,8 @@ class Query extends RequestAbstract
         $this->setQueryParam('SkuSellerList', \json_encode($sku));
     }
 
+    public function setOptions($option)
+    {
+        $this->setQueryParam('Options', $option);
+    }
 }
