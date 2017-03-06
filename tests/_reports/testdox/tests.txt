@@ -1,0 +1,8 @@
+Veda\Lazada\Tests\Client
+ [x] No request
+ [x] Type error request
+
+Veda\Lazada\Tests\Config
+ [x] Set and get true
+ [x] Set and get false
+

@@ -7,19 +7,16 @@
 namespace Veda\Lazada;
 
 use GuzzleHttp\Client as HttpClient;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Exception\ClientException;
+
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use Veda\Lazada\Exception\ResponseException;
-use Veda\Lazada\Response\XmlResponse;
-use Veda\Lazada\Response\JsonResponse;
+use Veda\Lazada\Request\RequestAbstract;
+
 
 class Client
 {
-
     protected $request;
-
 
     public function __construct(RequestAbstract $request = null)
     {
@@ -47,15 +44,14 @@ class Client
         if (null !== $request) {
             $this->setRequest($request);
         }
-
         try {
             // signature and build request
-            $request = $this->getRequest()->signature()->build();
+            $request = $this->getRequest()->validate()->signature()->build();
             $httpClient = new HttpClient();
             $response = $httpClient->request($request->getMethod(), $request->getUrl(), $request->getRequestOptions());
             $responseObject = ResponseFactory::create($request->getResponseHandle(), $response);
+            $responseObject->process();
             return $responseObject;
-
         } catch (ConnectException $e) {
             throw new ResponseException($e->getMessage(), $e->getResponse(), $this->getRequest());
         }catch (RequestException $e) {

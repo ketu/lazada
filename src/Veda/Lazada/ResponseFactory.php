@@ -28,4 +28,5 @@ class ResponseFactory
         }
         return $cls;
     }
+
 }

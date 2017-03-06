@@ -6,22 +6,20 @@
 
 namespace Veda\Lazada\Request\Product;
 
+use Veda\Lazada\Config;
 use Veda\Lazada\Request\RequestAbstract;
+use Veda\Lazada\Request\DateFilterTrait;
 use Veda\Lazada\Request\PagingTrait;
+use Veda\Lazada\Response\JsonResponse;
 
 class Query extends RequestAbstract
 {
-    use PagingTrait;
+    use PagingTrait, DateFilterTrait;
 
-    const PRODUCT_STATUS_ALL = 'all';
-    const PRODUCT_STATUS_LIVE = 'live';
-    const PRODUCT_STATUS_INACTIVE = 'inactive';
-    const PRODUCT_STATUS_DELETED = 'deleted';
-    const PRODUCT_STATUS_IMAGE_MISSING = 'image-missing';
-    const PRODUCT_STATUS_PENDING = 'pending';
-    const PRODUCT_STATUS_REJECTED = 'rejected';
-    const PRODUCT_STATUS_SOlD_OUT = 'sold-out';
-
+    public function __construct(Config $config, $defaultHandlerCls = \Veda\Lazada\Response\Product\Query::class)
+    {
+        parent::__construct($config, $defaultHandlerCls);
+    }
 
     public function getAction()
     {
@@ -35,25 +33,6 @@ class Query extends RequestAbstract
         return self::HTTP_METHOD_GET;
     }
 
-    public function setCreatedTimeLimit(\DateTime $startTime = null, \DateTime $endTime = null)
-    {
-        if (null !== $startTime) {
-            $this->setQueryParam('CreatedAfter', $startTime->format(\DateTime::ISO8601));
-        }
-        if (null !== $endTime) {
-            $this->setQueryParam('CreatedBefore', $startTime->format(\DateTime::ISO8601));
-        }
-    }
-
-    public function setUpdatedTimeLimit(\DateTime $startTime = null, \DateTime $endTime = null)
-    {
-        if (null !== $startTime) {
-            $this->setQueryParam('UpdatedAfter', $startTime->format(\DateTime::ISO8601));
-        }
-        if (null !== $endTime) {
-            $this->setQueryParam('UpdatedBefore', $startTime->format(\DateTime::ISO8601));
-        }
-    }
 
     public function setSearch($keyword)
     {

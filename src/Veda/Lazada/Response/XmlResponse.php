@@ -16,7 +16,7 @@ class XmlResponse extends ResponseAbstract
     public function __construct(Response $response)
     {
         parent::__construct($response);
-        $this->process();
+        //$this->process();
     }
     public function process()
     {

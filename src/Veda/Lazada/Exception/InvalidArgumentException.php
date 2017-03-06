@@ -6,9 +6,6 @@
 
 namespace Veda\Lazada\Exception;
 
-
-use Exception;
-
 class InvalidArgumentException extends \InvalidArgumentException
 {
     public function __construct($message = "", $requestCls, $code = 0, Exception $previous = null)

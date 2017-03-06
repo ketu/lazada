@@ -7,7 +7,7 @@
 namespace Veda\Lazada\Exception;
 
 use Psr\Http\Message\ResponseInterface;
-use Veda\Lazada\RequestAbstract;
+use Veda\Lazada\Request\RequestAbstract;
 
 class ResponseException extends \Exception
 {
@@ -17,7 +17,6 @@ class ResponseException extends \Exception
     public function __construct($errorMessage = null, ResponseInterface $response = null, RequestAbstract $request, \Exception $previous = null)
     {
         $code = 0;
-
         if (null !== $response) {
             $code = $response->getStatusCode();
             $body = \json_decode($response->getBody(), true);

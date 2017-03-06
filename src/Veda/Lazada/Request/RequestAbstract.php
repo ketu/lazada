@@ -22,7 +22,7 @@ abstract class RequestAbstract
 
     protected $defaultRequestOptions = [];
 
-    protected $responseHandler;
+    public $responseHandler;
 
     private $parameters = [
         'UserID' => null,
@@ -45,8 +45,6 @@ abstract class RequestAbstract
 
     abstract public function getAction();
 
-
-
     protected function setQueryParam($key, $value) {
         $this->queryParams[$key] = $value;
     }
@@ -66,20 +64,16 @@ abstract class RequestAbstract
         return $this->requestBody;
     }
 
-
     public function getRequestOptions()
     {
         $requestOptions = $this->defaultRequestOptions;
-
         $requestBody = $this->getRequestBody();
-
         if ($requestBody) {
             $requestOptions = array_merge($requestOptions, ['body'=> $requestBody]);
         }
         if ($this->queryParams) {
             $requestOptions = array_merge($requestOptions, ['form_params'=> $this->queryParams]);
         }
-
         return $requestOptions;
     }
     private function getBuildParameters()
@@ -87,8 +81,11 @@ abstract class RequestAbstract
         if ($this->queryParams) {
             return array_merge($this->queryParams, $this->parameters);
         }
-
         return $this->parameters;
+    }
+    public function validate()
+    {
+        return $this;
     }
     public function signature()
     {

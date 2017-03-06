@@ -14,7 +14,9 @@ class Query extends JsonResponse
     public function process()
     {
         parent::process();
-        //your logic here
+        if (isset($this->bodyData['Products'])) {
+            $this->bodyData = $this->bodyData['Products'];
+        }
 
     }
 }

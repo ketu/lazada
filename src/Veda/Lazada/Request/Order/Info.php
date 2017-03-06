@@ -3,25 +3,28 @@
  * User: ketu.lai <ketu.lai@gmail.com>
  * Date: 2017/3/6
  */
-namespace Veda\Lazada\Request\Category;
+
+namespace Veda\Lazada\Request\Order;
 
 use Veda\Lazada\Request\RequestAbstract;
 
-class Attributes extends RequestAbstract
+class Info extends RequestAbstract
 {
     public function getMethod()
     {
         // TODO: Implement getMethod() method.
         return self::HTTP_METHOD_GET;
     }
+
     public function getAction()
     {
         // TODO: Implement getAction() method.
-        return "GetCategoryAttributes";
+        return "GetOrder";
     }
 
-    public function setCategoryId($categoryId)
+    public function setOrderId($orderId)
     {
-        $this->setQueryParam('CategoryId', $categoryId);
+        $this->setQueryParam('OrderId', $orderId);
     }
+
 }
