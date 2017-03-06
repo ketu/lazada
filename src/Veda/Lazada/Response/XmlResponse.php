@@ -6,7 +6,6 @@
 
 namespace Veda\Lazada\Response;
 
-use Veda\Lazada\Response\ResponseAbstract;
 use Sabre\Xml\Service;
 use GuzzleHttp\Psr7\Response;
 

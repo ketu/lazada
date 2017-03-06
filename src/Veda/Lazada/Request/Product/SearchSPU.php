@@ -7,7 +7,7 @@
 namespace Veda\Lazada\Request\Product;
 
 use Veda\Lazada\Request\PagingTrait;
-use Veda\Lazada\RequestAbstract;
+use Veda\Lazada\Request\RequestAbstract;
 
 class SearchSPU extends RequestAbstract
 {
@@ -22,7 +22,7 @@ class SearchSPU extends RequestAbstract
     public function getMethod()
     {
         // TODO: Implement getMethod() method.
-        return "POST";
+        return self::HTTP_METHOD_POST;
     }
 
     public function setCategoryId($categoryId)

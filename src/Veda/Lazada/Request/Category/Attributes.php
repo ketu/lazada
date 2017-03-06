@@ -1,13 +1,13 @@
 <?php
 /**
  * User: ketu.lai <ketu.lai@gmail.com>
- * Date: 2017/2/27
+ * Date: 2017/3/6
  */
 namespace Veda\Lazada\Request\Category;
 
 use Veda\Lazada\Request\RequestAbstract;
 
-class Tree extends RequestAbstract
+class Attributes extends RequestAbstract
 {
     public function getMethod()
     {
@@ -17,6 +17,11 @@ class Tree extends RequestAbstract
     public function getAction()
     {
         // TODO: Implement getAction() method.
-        return "GetCategoryTree";
+        return "GetCategoryAttributes";
+    }
+
+    public function setCategoryId($categoryId)
+    {
+        $this->categoryId = $categoryId;
     }
 }

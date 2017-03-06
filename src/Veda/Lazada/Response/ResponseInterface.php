@@ -14,6 +14,5 @@ interface ResponseInterface
     public function getResponse();
     public function success();
     public function getMessage();
-
     public function process();
 }

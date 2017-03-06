@@ -6,7 +6,7 @@
 
 namespace Veda\Lazada\Request\Product;
 
-use Veda\Lazada\RequestAbstract;
+use Veda\Lazada\Request\RequestAbstract;
 use Veda\Lazada\Request\PagingTrait;
 
 class Query extends RequestAbstract
@@ -32,7 +32,7 @@ class Query extends RequestAbstract
     public function getMethod()
     {
         // TODO: Implement getMethod() method.
-        return "GET";
+        return self::HTTP_METHOD_GET;
     }
 
     public function setCreatedTimeLimit(\DateTime $startTime = null, \DateTime $endTime = null)

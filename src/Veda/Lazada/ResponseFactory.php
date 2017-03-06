@@ -6,7 +6,6 @@
 
 namespace Veda\Lazada;
 
-
 use GuzzleHttp\Psr7\Response;
 use Veda\Lazada\Response\JsonResponse;
 use Veda\Lazada\Response\ResponseAbstract;

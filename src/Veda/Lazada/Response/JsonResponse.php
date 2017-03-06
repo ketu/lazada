@@ -7,7 +7,6 @@
 namespace Veda\Lazada\Response;
 
 use GuzzleHttp\Psr7\Response;
-use Veda\Lazada\Response\ResponseAbstract;
 
 class JsonResponse extends ResponseAbstract
 {

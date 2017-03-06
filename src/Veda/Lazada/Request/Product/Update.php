@@ -1,26 +1,24 @@
 <?php
 /**
  * User: ketu.lai <ketu.lai@gmail.com>
- * Date: 2017/2/27
+ * Date: 2017/2/6
  */
+
 namespace Veda\Lazada\Request\Product;
 
 use Veda\Lazada\Request\RequestAbstract;
-use Veda\Lazada\Request\PagingTrait;
 
-class Brand extends RequestAbstract
+class Update extends RequestAbstract
 {
-    use PagingTrait;
-
     public function getAction()
     {
+        return 'UpdateProduct';
         // TODO: Implement getAction() method.
-        return "GetBrands";
     }
 
     public function getMethod()
     {
         // TODO: Implement getMethod() method.
-        return self::HTTP_METHOD_GET;
+        return self::HTTP_METHOD_POST;
     }
- }
+}

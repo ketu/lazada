@@ -1,13 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: laigc
- * Date: 2017/2/24
- * Time: 17:37
+ * User: ketu.lai <ketu.lai@gmail.com>
+ * Date: 2017/3/6
  */
 
 namespace Veda\Lazada\Response\Product;
-
 
 use GuzzleHttp\Psr7\Response;
 use Veda\Lazada\Response\JsonResponse;

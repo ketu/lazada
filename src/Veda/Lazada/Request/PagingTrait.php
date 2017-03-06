@@ -4,9 +4,7 @@
  * Date: 2017/2/27
  */
 
-
 namespace Veda\Lazada\Request;
-
 
 trait PagingTrait
 {

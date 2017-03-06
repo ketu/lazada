@@ -4,12 +4,16 @@
  * Date: 2017/2/21
  */
 
-namespace Veda\Lazada;
+namespace Veda\Lazada\Request;
 
+use Veda\Lazada\Config;
 use Veda\Lazada\Response\JsonResponse;
 
 abstract class RequestAbstract
 {
+    const HTTP_METHOD_GET = 'GET';
+    const HTTP_METHOD_POST = 'POST';
+
     protected $config;
 
     protected $fullApiUrl;
@@ -18,7 +22,7 @@ abstract class RequestAbstract
 
     protected $defaultRequestOptions = [];
 
-    protected $responseHandler = JsonResponse::class;
+    protected $responseHandler;
 
     private $parameters = [
         'UserID' => null,
@@ -31,9 +35,10 @@ abstract class RequestAbstract
 
     private $queryParams = [];
 
-    public function __construct(Config $config)
+    public function __construct(Config $config, $defaultHandlerCls = JsonResponse::class)
     {
         $this->config = $config;
+        $this->responseHandler = $defaultHandlerCls;
     }
 
     abstract public function getMethod();
