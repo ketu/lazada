@@ -1,22 +1,20 @@
 <?php
 /**
  * User: ketu.lai <ketu.lai@gmail.com>
- * Date: 2017/2/22
+ * Date: 2017/3/6
  */
 
-namespace Veda\Lazada\Request\Product;
+namespace Veda\Lazada\Request\Order;
 
-use Veda\Lazada\Request\ProductTrait;
+
 use Veda\Lazada\Request\RequestAbstract;
 
-class Create extends RequestAbstract
+class Invoice extends RequestAbstract
 {
-    use ProductTrait;
-
     public function getAction()
     {
         // TODO: Implement getAction() method.
-        return 'CreateProduct';
+        return "GetDocument";
     }
 
     public function getMethod()
@@ -25,4 +23,8 @@ class Create extends RequestAbstract
         return self::HTTP_METHOD_POST;
     }
 
+    public function setOrderItem($itemId)
+    {
+        $this->setQueryParam('OrderItemId', $itemId);
+    }
 }

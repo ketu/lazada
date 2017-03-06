@@ -5,7 +5,7 @@
  */
 namespace Veda\Lazada\Config;
 
-class DeliveryType extends ConfigAbstract
+class Delivery extends ConfigAbstract
 {
     const DELIVERY_TYPE_DROPSHIP = 'dropship';
     const DELIVERY_TYPE_PICKUP = 'pickup';

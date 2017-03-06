@@ -13,11 +13,6 @@ use Veda\Lazada\Request\RequestAbstract;
 
 class Shipped extends RequestAbstract
 {
-    public function getMethod()
-    {
-        // TODO: Implement getMethod() method.
-        return self::HTTP_METHOD_POST;
-    }
 
     public function getAction()
     {
@@ -25,6 +20,11 @@ class Shipped extends RequestAbstract
         return "SetStatusToReadyToShip";
     }
 
+    public function getMethod()
+    {
+        // TODO: Implement getMethod() method.
+        return self::HTTP_METHOD_POST;
+    }
     public function setOrderItem(array $itemId)
     {
         $this->setQueryParam('OrderItemIds', implode(',', $itemId));
@@ -34,6 +34,7 @@ class Shipped extends RequestAbstract
     {
         $this->setQueryParam('DeliveryType', $type);
     }
+
     public function setTrackingNumber($trackingNumber)
     {
         $this->setQueryParam('TrackingNumber', $trackingNumber);

@@ -6,10 +6,13 @@
 
 namespace Veda\Lazada\Request\Product;
 
+use Veda\Lazada\Request\ProductTrait;
 use Veda\Lazada\Request\RequestAbstract;
 
 class Update extends RequestAbstract
 {
+    use ProductTrait;
+
     public function getAction()
     {
         return 'UpdateProduct';

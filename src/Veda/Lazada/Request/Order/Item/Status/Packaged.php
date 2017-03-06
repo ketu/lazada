@@ -11,11 +11,6 @@ use Veda\Lazada\Request\RequestAbstract;
 
 class Packaged extends RequestAbstract
 {
-    public function getMethod()
-    {
-        // TODO: Implement getMethod() method.
-        return self::HTTP_METHOD_POST;
-    }
 
     public function getAction()
     {
@@ -23,6 +18,11 @@ class Packaged extends RequestAbstract
         return "SetStatusToPackedByMarketplace";
     }
 
+    public function getMethod()
+    {
+        // TODO: Implement getMethod() method.
+        return self::HTTP_METHOD_POST;
+    }
     public function setOrderItem(array $itemId)
     {
         $this->setQueryParam('OrderItemIds', implode(',', $itemId));

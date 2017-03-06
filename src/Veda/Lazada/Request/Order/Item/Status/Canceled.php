@@ -10,16 +10,17 @@ use Veda\Lazada\Request\RequestAbstract;
 
 class Canceled extends RequestAbstract
 {
-    public function getMethod()
-    {
-        // TODO: Implement getMethod() method.
-        return self::HTTP_METHOD_POST;
-    }
+
 
     public function getAction()
     {
         // TODO: Implement getAction() method.
         return "SetStatusToCanceled";
+    }
+    public function getMethod()
+    {
+        // TODO: Implement getMethod() method.
+        return self::HTTP_METHOD_POST;
     }
 
     public function setOrderItem($itemId)
