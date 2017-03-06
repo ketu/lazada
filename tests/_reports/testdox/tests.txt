@@ -6,3 +6,10 @@ Veda\Lazada\Tests\Config
  [x] Set and get true
  [x] Set and get false
 
+Veda\Lazada\Tests\ResponseFactory
+ [x] Create
+ [x] Handle not exists
+
+Veda\Lazada\Tests\Utils\ArrayToXml
+ [x] Convert
+
