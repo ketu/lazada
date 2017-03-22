@@ -8,7 +8,7 @@ namespace Veda\Lazada\Request\Product;
 
 use Veda\Lazada\Exception\InvalidArgumentException;
 use Veda\Lazada\Request\RequestAbstract;
-use Veda\Lazada\Utils\ArrayToXml;
+use Veda\Utils\Converter\ArrayToXml;
 
 class Remove extends RequestAbstract
 {

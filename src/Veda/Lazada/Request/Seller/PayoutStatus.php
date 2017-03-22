@@ -6,7 +6,6 @@
 
 namespace Veda\Lazada\Request\Seller;
 
-
 use Veda\Lazada\Request\DateFilterTrait;
 use Veda\Lazada\Request\RequestAbstract;
 

@@ -6,7 +6,7 @@
 
 namespace Veda\Lazada\Request;
 
-use Veda\Lazada\Utils\ArrayToXml;
+use Veda\Utils\Converter\ArrayToXml;
 
 trait ProductTrait
 {

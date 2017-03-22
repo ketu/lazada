@@ -13,7 +13,8 @@
     "require": {
         "php": ">=7.0",
         "guzzlehttp/guzzle": "^6.2",
-        "sabre/xml": "^2.0"
+        "sabre/xml": "^2.0",
+        "veda/utils": "dev-master"
     },
     "autoload": {
         "psr-4": {

@@ -10,7 +10,6 @@ use Veda\Lazada\Config;
 use Veda\Lazada\Request\RequestAbstract;
 use Veda\Lazada\Request\DateFilterTrait;
 use Veda\Lazada\Request\PagingTrait;
-use Veda\Lazada\Response\JsonResponse;
 
 class Query extends RequestAbstract
 {

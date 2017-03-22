@@ -5,7 +5,6 @@
  */
 namespace Veda\Lazada\Request\Seller;
 
-
 use Veda\Lazada\Request\RequestAbstract;
 
 /**

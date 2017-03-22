@@ -6,7 +6,6 @@
 
 namespace Veda\Lazada\Request\QualityControl;
 
-
 use Veda\Lazada\Request\PagingTrait;
 use Veda\Lazada\Request\RequestAbstract;
 

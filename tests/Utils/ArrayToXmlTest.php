@@ -7,7 +7,7 @@
 namespace Veda\Lazada\Tests\Utils;
 
 use PHPUnit\Framework\TestCase;
-use Veda\Lazada\Utils\ArrayToXml;
+use Veda\Utils\Converter\ArrayToXml;
 
 class ArrayToXmlTest extends TestCase
 {
